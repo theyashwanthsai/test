@@ -21,12 +21,12 @@ def alert():
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(
-        body='Hello! This is a test message from your kidnapping detection system.',
+        body='Hello! This is a message from your kidnapping detection system.',
         from_='whatsapp:+14155238886',
         to='whatsapp:+917795348927'
     )
-
-    print(message.sid)
+    print("Alert")
+    # print(message.sid)
 
 app = Flask(__name__)
 
@@ -34,7 +34,7 @@ app = Flask(__name__)
 camera = None
 output_frame = None
 lock = threading.Lock()
-model = YOLO("last.pt")  # Load the YOLOv8 model
+model = YOLO("best.pt")  # Load the YOLOv8 model
 
 def initialize_camera():
     global camera
@@ -83,6 +83,7 @@ def capture_frames():
           # Reset the counter after alerting
           kidnapping_counter = 0
           detection_history.clear()
+          break
 
       # Optional: Print all detection results
       for r in results:
